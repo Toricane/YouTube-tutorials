@@ -1,7 +1,7 @@
 import interactions
 
 
-bot = interactions.Client("OTI4MDU0Njc5Nzg1NTc4NTc2.YdTMRg.BrsQGPsof-k7MZECxv4JWj3dbtg")
+bot = interactions.Client("token")
 
 
 @bot.event
