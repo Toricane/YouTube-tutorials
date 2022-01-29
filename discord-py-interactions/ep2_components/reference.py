@@ -1,6 +1,6 @@
 import interactions
 
-bot = interactions.Client("ODc0NzgwOTE4MDgxMDE1ODg5.YRL9Nw.-X7UXQg3v43oeDHG0xPEEuNQO8c")
+bot = interactions.Client("token")
 
 
 @bot.event
@@ -11,7 +11,7 @@ async def on_ready():
 @bot.command(
     name="hello-world",
     description="A simple example command",
-    scope=874781880489222154,
+    scope=925511055034187788,
 )
 async def hello_world(ctx: interactions.CommandContext):
     await ctx.send("Hello World!")
@@ -40,7 +40,7 @@ async def hello_world(ctx: interactions.CommandContext):
 @bot.command(
     name="component-command",
     description="A simple example command that sends components",
-    scope=874781880489222154,
+    scope=925511055034187788,
 )
 async def component_command(ctx: interactions.CommandContext):
     primary_button = interactions.Button(
@@ -68,7 +68,17 @@ async def component_command(ctx: interactions.CommandContext):
         label="LINK",
         url="https://example.com",
     )
-    action_row = interactions.ActionRow(
+    select = interactions.SelectMenu(
+        custom_id="select",
+        options=[
+            interactions.SelectOption(label="Option 1", value="1"),
+            interactions.SelectOption(label="Option 2", value="2"),
+        ],
+        placeholder="Select an option",
+        min_values=1,
+        max_values=2,
+    )
+    buttons_row = interactions.ActionRow(
         components=[
             primary_button,
             secondary_button,
@@ -77,12 +87,20 @@ async def component_command(ctx: interactions.CommandContext):
             link_button,
         ]
     )
-    await ctx.send("All the components:", components=action_row)
+    select_row = interactions.ActionRow(components=[select])
+    await ctx.send("All the components:", components=[buttons_row, select_row])
 
 
 @bot.component("primary")
+@bot.component("secondary")
+@bot.component("success")
+@bot.component("danger")
+@bot.component("select")
 async def primary_component(ctx: interactions.ComponentContext):
-    await ctx.send("You clicked the primary component!", ephemeral=True)
+    await ctx.send(
+        f"You clicked the {ctx.data.custom_id} component!\n{('Selected options: ' + ', '.join(ctx.data.values)) if ctx.data.values else ''}",
+        ephemeral=True,
+    )
 
 
 bot.start()
