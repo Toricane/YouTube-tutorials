@@ -69,7 +69,7 @@ async def subcommand(ctx: ipy.CommandContext, base_res: ipy.BaseResult):
 
 
 # make it clear that you need to
-# define sole subcommands
+# define lone subcommands
 # **before** grouped ones
 
 
