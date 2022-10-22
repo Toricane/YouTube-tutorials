@@ -15,7 +15,7 @@ async def ping(ctx: ipy.CommandContext):
 
 
 @bot.command()
-@ipy.option("WHat is your message?")
+@ipy.option("What is your message?")
 async def copycat(ctx: ipy.CommandContext, message: str):
     """Sends the message you provide"""
     await ctx.send(message)
