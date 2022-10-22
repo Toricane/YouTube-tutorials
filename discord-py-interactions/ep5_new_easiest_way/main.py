@@ -14,4 +14,12 @@ async def ping(ctx: ipy.CommandContext):
     await ctx.send(f"Pong! {bot.latency}ms")
 
 
+@bot.command()
+@ipy.option("WHat is your message?")
+async def copycat(ctx: ipy.CommandContext, message: str):
+    """Sends the message you provide"""
+    await ctx.send(message)
+
+
 bot.start()
+
